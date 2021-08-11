@@ -129,7 +129,12 @@ public class MainActivity extends AppCompatActivity {
                 next_level++;
                 dayList.clear();
                 // year을 올려주기위한 if문
-                if((Integer.parseInt(curMonthFormat.format(date))+next_level)>12){
+                if((Integer.parseInt(curMonthFormat.format(date))+next_level)%12==0)
+                {
+                    int year_num=(Integer.parseInt(curMonthFormat.format(date))+next_level)/12;
+                    tvDate.setText((Integer.parseInt(curYearFormat.format(date))+year_num) + "/" + 12);
+                }
+                else if((Integer.parseInt(curMonthFormat.format(date))+next_level)>12){
                     int year_num=(Integer.parseInt(curMonthFormat.format(date))+next_level)/12;
                     tvDate.setText((Integer.parseInt(curYearFormat.format(date))+year_num) + "/" + (Integer.parseInt(curMonthFormat.format(date))+next_level)%12);
                 }
