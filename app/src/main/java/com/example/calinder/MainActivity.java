@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
     final SimpleDateFormat curYearFormat = new SimpleDateFormat("yyyy", Locale.KOREA);
     final SimpleDateFormat curMonthFormat = new SimpleDateFormat("MM", Locale.KOREA);
     final SimpleDateFormat curDayFormat = new SimpleDateFormat("dd", Locale.KOREA);
-    Button btn_next;
+    Button btn_next,btn_back;
     int point_2_index,next_level=0;
 
 
@@ -67,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
         tvDate = (TextView) findViewById(R.id.tv_date);
         gridView = (GridView) findViewById(R.id.gridview);
         btn_next=(Button)findViewById(R.id.btn_next);
+        btn_back=(Button)findViewById(R.id.btn_back);
         // 오늘에 날짜를 세팅 해준다.
         long now = System.currentTimeMillis();
         final Date date = new Date(now);
@@ -115,7 +116,6 @@ public class MainActivity extends AppCompatActivity {
                     else{
                         gridView.getChildAt(point_1_index).setBackgroundColor(Color.parseColor("#00000000"));
                         clicked=false;
-
                     }
                 }
             }
@@ -130,6 +130,39 @@ public class MainActivity extends AppCompatActivity {
                 dayList.clear();
                 // year을 올려주기위한 if문
                 if((Integer.parseInt(curMonthFormat.format(date))+next_level)>12){
+                    int year_num=(Integer.parseInt(curMonthFormat.format(date))+next_level)/12;
+                    tvDate.setText((Integer.parseInt(curYearFormat.format(date))+year_num) + "/" + (Integer.parseInt(curMonthFormat.format(date))+next_level)%12);
+                }
+                else
+                {
+                    tvDate.setText(curYearFormat.format(date) + "/" + (Integer.parseInt(curMonthFormat.format(date))+next_level));
+                }
+
+                dayList= setCalendar_yo(dayList);
+
+
+                //날짜 배치
+                dayList=setCalendar_day_i(dayList,mCal,date,next_level);
+                setCalendarDate(mCal.get(Calendar.MONTH) + 1);
+
+
+                gridAdapter = new GridAdapter(getApplicationContext(), dayList);
+                gridView.setAdapter(gridAdapter);
+
+            }
+        });
+        btn_back.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                next_level--;
+                dayList.clear();
+                // year을 올려주기위한 if문
+                if((Integer.parseInt(curMonthFormat.format(date))+next_level)%12==0)
+                {
+                    int year_num=(Integer.parseInt(curMonthFormat.format(date))+next_level)/12;
+                    tvDate.setText((Integer.parseInt(curYearFormat.format(date))+year_num) + "/" + 12);
+                }
+                else if((Integer.parseInt(curMonthFormat.format(date))+next_level)>12){
                     int year_num=(Integer.parseInt(curMonthFormat.format(date))+next_level)/12;
                     tvDate.setText((Integer.parseInt(curYearFormat.format(date))+year_num) + "/" + (Integer.parseInt(curMonthFormat.format(date))+next_level)%12);
                 }

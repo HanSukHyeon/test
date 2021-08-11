@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -9,23 +10,33 @@
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:orientation="horizontal">
+
+          <Button
+              android:id="@+id/btn_back"
+              android:layout_width="wrap_content"
+              android:layout_height="match_parent"
+              android:text="이전"
+              android:textSize="10sp"
+              android:layout_weight="1"/>
           <TextView
               android:id="@+id/tv_date"
               android:layout_width="347dp"
               android:layout_height="50dp"
               android:layout_weight="1"
-              android:background="#21a4ff"
+              android:background="#773FCF"
               android:gravity="center_vertical"
               android:paddingLeft="10dp"
               android:textColor="#ffffff"
               android:textSize="20sp" />
+
           <Button
               android:id="@+id/btn_next"
               android:layout_width="wrap_content"
               android:layout_height="match_parent"
-              android:text="다음달"
+              android:layout_weight="1"
+              android:text="이후"
               android:textSize="10sp"
-              android:layout_weight="1"/>
+              app:iconTint="#8F5555" />
       </LinearLayout>
     <GridView
         android:layout_marginTop="10dp"
